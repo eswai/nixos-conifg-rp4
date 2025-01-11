@@ -95,7 +95,7 @@
     userEmail = "eswai";
     extraConfig.credential.helper = "manager";
     extraConfig.credential."https://github.com".username = "eswai";
-    extraConfig.credential.credentialStore = "store";
+    extraConfig.credential.credentialStore = "cache";
   };
 
   # This value determines the home Manager release that your
