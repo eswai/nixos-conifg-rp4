@@ -79,6 +79,11 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    ruby_3_4
+    rbenv
+    uv
+    python3Full
   ];
 
   # basic configuration of git, please change to your own
