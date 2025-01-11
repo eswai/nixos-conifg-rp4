@@ -23,12 +23,7 @@
         nixos-hardware.nixosModules.raspberry-pi-4
 
         ({ config, lib, pkgs, ... }: 
-
-        let
-          secretsFile = ./secrets.json;
-          secrets = builtins.fromJSON (builtins.readFile secretsFile);
-        in {
-
+        {
           system.stateVersion = "24.11";
           nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -36,7 +31,7 @@
             [
               ./hardware-configuration.nix
             ];
-
+          
           hardware = {
             raspberry-pi."4".apply-overlays-dtmerge.enable = true;
             deviceTree = {
@@ -61,10 +56,9 @@
 
 	  networking.hostName = "nixos"; # Define your hostname.
           networking.wireless.enable = true;
-	  networking.wireless.networks = {
-            ${secrets.ssid} = {
-              psk = secrets.password;
-            };
+	  networking.wireless.secretsFile = "/run/secrets/wireless.conf";
+          networking.wireless.networks = {
+            OpenWrt24g2.pskRaw = "ext:psk_wifi";
           };
 	  networking.wireless.extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
 	  # output ends up in /run/wpa_supplicant/wpa_supplicant.conf
