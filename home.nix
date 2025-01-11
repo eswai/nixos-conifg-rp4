@@ -84,6 +84,8 @@
     rbenv
     uv
     python3Full
+
+    git-credential-manager
   ];
 
   # basic configuration of git, please change to your own
